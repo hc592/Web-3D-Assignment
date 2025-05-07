@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Weapons World – About</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <style>
+      * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      font-family: sans-serif;
+    }
+
+    body {
+      background-color: #e0e0e0;
+    }
+
+    .header {
+      padding: 20px;
+      background-color: #333333;
+    }
+
+    .logo {
+      font-family: 'Bangers', cursive;
+      font-size: 48px;
+      color: #486c3e;
+      letter-spacing: 2px;
+      font-weight: bold;
+      text-shadow:
+        -2px -2px 0 #000,
+         2px -2px 0 #000,
+        -2px  2px 0 #000,
+         2px  2px  0 #000;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .subtitle {
+
+      font-size: 15px;
+  color: #cccccc;
+  font-family: 'Courier New', monospace;
+  gap: 5px;
+  margin-top: 8px;
+    }
+
+    
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: #6d6d6d54;
+      display: flex;
+      justify-content: right;
+      gap: 20px;
+      padding: 6px 20px;
+    }
+
+
+    .nav a, .dropbtn {
+      background-color: #444444;
+      color: #ffffff;
+      padding: 12px 28px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 6px;
+      transition: transform 0.2s ease, background-color 0.2s ease;
+      display: inline-block;
+    }
+
+    .nav a:hover, .dropbtn:hover {
+      transform: scale(1.2);
+      background-color: #222222;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #444444;
+      width: 160px;
+      z-index: 1;
+      border-radius: 6px;
+      overflow: hidden;
+      top: 100%;
+      left: 0;
+    }
+
+    .dropdown-content a {
+      color: white;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      transition: background-color 0.2s ease;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #222222;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .arrow {
+      display: inline-block;
+      margin-left: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .dropdown:hover .arrow {
+      transform: rotate(180deg);
+    }
+
+    .viewer-container {
+      padding: 40px 20px;
+      background: #f5f5f5;
+    }
+
+    .content { padding: 40px; max-width: 1000px; margin: 0 auto; background: #fff; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.1); }
+    .content h1 { font-family: 'Bangers', cursive; color: #333; font-size: 40px; margin-bottom: 20px; text-align: center; }
+    .content h2 { color: #333; font-size: 28px; margin-top: 30px; margin-bottom: 10px; }
+    .content h3 { color: #333; font-size: 22px; margin-top: 30px; margin-bottom: 10px; }
+    .content p {color: #333; font-size: 16px;  line-height: 1.8; margin-bottom: 15px; }
+
+        
+    .footer {
+      background:#333; color:#fff;
+      display:flex; justify-content:space-between; align-items:center;
+      padding:60px 30px; font-size:14px; flex-wrap:wrap;
+    }
+    .footer a { color:#fff; margin-left:16px; transition:0.3s }
+    .footer a:hover { color:#ccc }
+    </style>
+</head>
+
+<body>
+  <div class="header">
+    <a href="../Weapons World.html" class="logo">Weapons World</a>
+    <div class="subtitle"><span id="typed"></span></div>
+  </div>
+
+  <div class="nav">
+    <a href="../Weapons World.html">Home</a>
+    <div class="dropdown">
+      <a href="javascript:void(0);" class="dropbtn">
+        Weapons <span class="arrow">▼</span>
+      </a>
+      <div class="dropdown-content">
+        <a href="../1911/1911.html">1911</a>
+        <a href="../Mossberg500/Mossberg500.html">Mossberg 500</a>
+        <a href="../Bow/Bow.html">Bow</a>
+      </div>
+    </div>
+    <a href="../About/About.html">About</a>
+    <a href="../Reference/Reference.html">Reference</a>
+    <a href="">Contact</a>
+  </div>
+
+  <div class="content">
+    <h1>About Weapons World 3D Application</h1>
+
+    <h2>1. Overview</h2>
+    <p>My website is about weapons introduction. The website contains 3D models of three different weapons: 1911, Mossberg 500, and bow. And each weapon's 3D display has some interactive functions<p>
+
+    <h2>2. 3D Models</h2>
+    <p>I made three 3D weapon models in Blender. In order to make the animation better, I referred to the internal structure drawings of these weapons and made the different parts of the weapons separately. Each weapon has at least one swap animation and one firing animation.</p>
+    <img src="1.png" alt="3D Models" width="400"  />
+
+    <h2>3.Design</h2>
+    <p>In addition to the content on canvas, I also learned more about html, css, js on W3Schools, MDN Web Docs, JavaScript.info</p>
+    <h3>UI</h3>
+    <p>I used a simple and clear web page layout. Each page has a follow-up navigation bar and each button has a touch animation effect and the edges are rounded to make it look more comfortable. In order to enhance the visual expression of the web page, libraries such as GSAP, ScrollReveal and Typed.js were added to enhance the visual effect.</p>
+    <h3>3D Interaction</h3>
+    <p>Each 3D model page provides the following features to the user:</p>
+        <p> Rotate manually or automatically.</p>
+        <p> Adjust background color</p>
+        <p> Adjust lighting.</p>
+        <p> Toggle wireframe.</p>
+        <p> Play specific animations and corresponding sound effects</p>
+
+   
+ 
+    <h2>4. Accessibility Considerations</h2>
+    <p>Keyboard accessibility is supported for navigation and button interaction. Color contrast is sufficient for readability. Content layout adapts to different screen sizes. Labels and descriptions enhance usability for all users.</p>
+
+    <h2>5. Test</h2>
+    <p>Devices used: Windows personal computer (Chrome, Edge), Android phone (Chrome Mobile).</p>
+      <p>Browsers tested: Chrome, Edge.</p>
+      <p>Features tested: 3D Model, button interactivity, light control, background color change, animation triggering, page navigation.</p>
+      
+        <p> Issues found:</p>
+          <p> There are errors in the paths of some buttons, resulting in some buttons being unable to enter the corresponding pages.</p>
+            <p> Some model animations are too slow.</p>
+              <p> Due to the size and position of the model, the camera position needs to be adjusted to better display it.</p>
+                <p>When playing animations, the sound and animation are out of sync.</p>
+                  <p> Some code is repeated.</p>
+      
+                    <p>Final result: The webpage can run on major devices and browsers. All interactions and effects work and are smooth.</p>
+
+    <h2>6. MVC</h2>
+    <p>This project follows the Model-View-Controller (MVC) architecture principle:</p>
+    <p>Model: The 3D model paths, animation groups, and associated resources are stored and managed as arrays and objects in JavaScript, acting as the application's data layer.</p>
+    <p>View: The HTML and CSS components form the front-end structure that displays the 3D models, buttons, and user interface elements to users.</p>
+    <p>Controller: JavaScript functions handle all user interactions, trigger model loading, control animations, and dynamically modify the scene based on user inputs.</p>
+   
+    <h2>7. Deeper Understanding</h2>
+    <p>In addition to the basic code, I also used GSAP, ScrollReveal, and Typed.js for some animation effects, which made the web page visually better and improved the user experience.</p>
+    <p>By referring to some models and pictures, and watching related videos(detailed content is on the Reference page), I made two relatively complex gun 3D models and made animations through keyframes.</p>
+    <p>Dynamic scene background color change and light control via JavaScript event handlers.</p>
+  
+  
+  </div>
+
+  <footer class="footer">
+    <div>© 2025 Web 3D Applications</div>
+    <div>
+      <a href="#">Facebook</a>
+      <a href="#">Twitter</a>
+      <a href="#">Instagram</a>
+    </div>
+  </footer>
+
+<script>
+  new Typed("#typed", {
+    strings: ["—— Tactical intelligence online ——", "—— This is the world of weapons ——"],
+    typeSpeed: 45,
+    backSpeed: 20,
+    backDelay: 1500,
+    loop: true
+  });
+
+  gsap.from(".header", { y: -120, duration: 1, ease: "linear" });
+  gsap.from(".nav", { opacity: 0, duration: 1, delay: 1, ease: "linear" });
+  ScrollReveal().reveal(".content", { origin: "bottom", distance: "40px", duration: 1000, easing: "ease-out", opacity: 0 });
+  ScrollReveal().reveal(".footer", { origin: "bottom", distance: "40px", duration: 1000, easing: "ease-out", opacity: 0 });
+</script>
+
+</body>
+</html>

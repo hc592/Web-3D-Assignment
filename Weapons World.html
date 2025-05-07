@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Weapons World</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      font-family: sans-serif;
+    }
+
+    body {
+      background-color: #e0e0e0;
+    }
+
+    .header {
+      padding: 20px;
+      background-color: #333333;
+    }
+
+    .logo {
+      font-family: 'Bangers', cursive;
+      font-size: 48px;
+      color: #486c3e;
+      letter-spacing: 2px;
+      font-weight: bold;
+      text-shadow:
+        -2px -2px 0 #000,
+         2px -2px 0 #000,
+        -2px  2px 0 #000,
+         2px  2px  0 #000;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .subtitle {
+
+      font-size: 15px;
+  color: #cccccc;
+  font-family: 'Courier New', monospace;
+  gap: 5px;
+  margin-top: 8px;
+    }
+
+    
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: #6d6d6d54;
+      display: flex;
+      justify-content: right;
+      gap: 20px;
+      padding: 6px 20px;
+    }
+
+
+    .nav a, .dropbtn {
+      background-color: #444444;
+      color: #ffffff;
+      padding: 12px 28px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 6px;
+      transition: transform 0.2s ease, background-color 0.2s ease;
+      display: inline-block;
+    }
+
+    .nav a:hover, .dropbtn:hover {
+      transform: scale(1.2);
+      background-color: #222222;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #444444;
+      width: 160px;
+      z-index: 1;
+      border-radius: 6px;
+      overflow: hidden;
+      top: 100%;
+      left: 0;
+    }
+
+    .dropdown-content a {
+      color: white;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      transition: background-color 0.2s ease;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #222222;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .arrow {
+      display: inline-block;
+      margin-left: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .dropdown:hover .arrow {
+      transform: rotate(180deg);
+    }
+
+    .image-container-overlap {
+      position: relative;
+      width: 100%;
+      height: auto;
+      margin-top: 80px;
+    }
+
+    .background-image-overlap {
+      width: 60%;
+      height: auto;
+      display: block;
+      margin-left: 0;
+    }
+
+    .glass-overlay-overlap {
+      position: absolute;
+      top: 65%;
+      left: 70%;
+      transform: translateX(-50%);
+      width: 60%;
+      padding: 20px 30px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      color: #000;
+      font-size: 16px;
+      line-height: 1.6;
+      text-align: left;
+      box-shadow: 0 50px 100px rgb(0, 0, 0);
+    }
+
+    .intro-word {
+      font-weight: bold;
+      font-size: 40px;
+      display: inline-block;
+      margin-right: 6px;
+    }
+
+    .three-panel-section {
+      margin-top: 80px;
+      display: flex;
+      justify-content: space-around;
+      padding: 40px 20px;
+      background-color: #e0e0e0;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .panel-link {
+      min-width: 280px;
+      flex: 1;
+      text-decoration: none;
+      color: inherit;
+      width: 30%;
+      transition: transform 0.3s ease;
+    }
+
+    .panel-link:hover {
+      transform: scale(1.05);
+    }
+
+    .panel {
+      display: flex;
+      flex-direction: column;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: box-shadow 0.3s ease, background-color 0.3s ease;
+    }
+
+    .panel img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .panel:hover {
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      background-color: #f8f8f8;
+    }
+
+    .panel h3 {
+      margin-top: 12px;
+      font-size: 20px;
+      color: #222222;
+    }
+
+    .panel p {
+      margin-top: 12px;
+      font-size: 16px;
+      color: #333333;
+      line-height: 1.5;
+    }
+
+    .footer {
+      background-color: #333333;
+      color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 60px 30px;
+      font-size: 14px;
+      flex-wrap: wrap;
+    }
+
+    .footer a {
+      color: #ffffff;
+      margin-left: 16px;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer a:hover {
+      color: #cccccc;
+    }
+
+    .footer-left {
+      font-weight: normal;
+    }
+
+    .footer-right {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div class="header">
+    <a href="Weapons World.html" class="logo">Weapons World</a>
+    <div class="subtitle"> 
+      <span id="typed"></span>
+    </div>
+  </div>
+
+  <div class="nav">
+    <a href="Weapons World.html">Home</a>
+    <div class="dropdown">
+      <a href="javascript:void(0);" class="dropbtn">
+        Weapons <span class="arrow">▼</span>
+      </a>
+      <div class="dropdown-content">
+        <a href="1911/1911.html">1911</a>
+        <a href="Mossberg500/Mossberg500.html">Mossberg 500</a>
+        <a href="Bow/Bow.html">Bow</a>
+      </div>
+    </div>
+    <a href="About/About.html">About</a>
+    <a href="Reference/Reference.html">Reference</a>
+    <a href="">Contact</a>
+  </div>
+
+
+  <div class="image-container-overlap">
+    <img src="picture/1.jpg" alt="Decorative Image" class="background-image-overlap" />
+    <div class="glass-overlay-overlap">
+      <p><span class="intro-word">Weapons</span> are tools designed for attack, defense, or deterrence, playing a significant role throughout human history and across cultures. They come in many forms, ranging from melee weapons like swords, spears, and axes, to ranged weapons such as bows, firearms, and artillery, and even to advanced modern technologies like missiles and drones. Beyond warfare, weapons are also used in hunting, self-defense, and certain sports or performances. As technology advances, weapons continue to evolve in power and precision, raising ongoing discussions around safety, ethics, and regulation.</p>
+    </div>
+  </div>
+
+
+  <div class="three-panel-section">
+    <a href="1911/1911.html" class="panel-link">
+      <div class="panel">
+        <img src="picture/1911.jpg" alt="1911" />
+        <h3>M1911 Pistol</h3>
+        <p>The M1911 is a semi-automatic pistol designed by the famous American firearms designer John Browning. It was officially adopted by the U.S. military in 1911, which is where it gets its name. Chambered in .45 ACP, the M1911 is known for its powerful stopping power, simple design, and high reliability. It served as the standard-issue sidearm for the U.S. Armed Forces for over 70 years, seeing action in World War I, World War II, the Korean War, and the Vietnam War. Even today, modernized versions of the M1911 are still widely used in military, law enforcement, and civilian sectors, making it one of the most iconic handguns in history.</p>
+      </div>
+    </a>
+    <a href="Mossberg500/Mossberg500.html" class="panel-link">
+      <div class="panel">
+        <img src="picture/Mossberg.jpg" alt="Mossberg 500" />
+        <h3>Mossberg 500 Shotgun</h3>
+        <p>The Mossberg 500 is a series of pump-action shotguns developed by O.F. Mossberg & Sons in the 1960s. Known for its reliability, durability, and affordability, the Mossberg 500 is widely used in military, law enforcement, and civilian applications. It is available in various configurations, including models for hunting, home defense, and tactical use. The shotgun features a simple design, ambidextrous safety, and a wide range of customizable options, making it one of the most popular and versatile shotguns in the world.</p>
+      </div>
+    </a>
+    <a href="Bow/Bow.html" class="panel-link">
+      <div class="panel">
+        <img src="picture/Bow.jpg" alt="Bow" />
+        <h3>Bow and Arrow</h3>
+        <p>The bow and arrow is one of the oldest and most effective ranged weapons in human history. Used for hunting and warfare for thousands of years, it allowed combatants to strike from a distance with speed and precision. Before the widespread use of firearms, the bow was a dominant weapon on battlefields across the world, valued for its silence, reusability, and lethality in skilled hands.</p>
+      </div>
+    </a>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-left">© 2025 Web 3D Applications</div>
+    <div class="footer-right">
+      <a href="#">Facebook</a>
+      <a href="#">Twitter</a>
+      <a href="#">Instagram</a>
+    </div>
+  </footer>
+
+  <script>
+    
+
+    ScrollReveal().reveal('.panel', {
+      origin: 'bottom',
+      distance: '40px',
+      duration: 1000,
+      easing: 'ease-out',
+      opacity: 0,
+      interval: 200
+    });
+
+    ScrollReveal().reveal('.footer', {
+    origin: 'bottom',
+    distance: '40px',
+    duration: 1000,
+    easing: 'ease-out',
+    opacity: 0
+  });
+
+  window.addEventListener('load', () => {
+    gsap.from(".header", {
+  y: -120, 
+
+  duration: 1,
+  ease: "linear"
+});
+
+gsap.from(".nav", {
+
+  opacity: 0,
+  duration: 1,
+  ease: "linear",
+  delay: 1
+});
+
+      gsap.from(".background-image-overlap", {
+        x: -100,        
+        opacity: 0,
+        duration: 2,   
+        ease: "power2.out"
+      });
+  
+
+      gsap.from(".glass-overlay-overlap", {
+        x: 100,     
+        opacity: 0,
+        duration: 2,
+        delay: 0.3,  
+        ease: "power2.out"
+      });
+    });
+
+  new Typed("#typed",{
+    strings: [
+      "—— Tactical intelligence online ——",
+      "—— This is the world of weapons ——"
+    ],
+    typeSpeed: 45,
+    backSpeed: 20,
+    backDelay: 1500,
+    loop: true
+  });
+  document.querySelectorAll('.panel-link').forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    const targetUrl = this.href;
+    const panel = this.querySelector('.panel');
+    const rect = panel.getBoundingClientRect();
+
+    const clone = panel.cloneNode(true);
+    clone.style.position = 'fixed';
+    clone.style.top = `${rect.top}px`;
+    clone.style.left = `${rect.left}px`;
+    clone.style.width = `${rect.width}px`;
+    clone.style.height = `${rect.height}px`;
+    clone.style.margin = '0';
+    clone.style.zIndex = 9999;
+    clone.style.boxShadow = '0 0 30px rgba(0,0,0,0.4)';
+    clone.style.backgroundColor = window.getComputedStyle(panel).backgroundColor;
+
+
+    clone.querySelectorAll('*').forEach(child => {
+      child.classList.add('fade-target');
+    });
+
+    document.body.appendChild(clone);
+    document.body.style.overflow = 'hidden';
+
+
+    gsap.to(clone, {
+      top: 0,
+      left: 0,
+      width: '100vw',
+      height: '100vh',
+      backgroundColor: '#e0e0e0',
+      duration: 1,
+      ease: "power2.inOut"
+    });
+
+
+    gsap.to(clone.querySelectorAll('.fade-target'), {
+      opacity: 0,
+      duration: 0.6,
+      delay: 0.5,
+      ease: "power1.out"
+    });
+
+
+    setTimeout(() => {
+      window.location.href = targetUrl;
+    }, 1400);
+  });
+});
+</script>
+
+  
+</body>
+</html>

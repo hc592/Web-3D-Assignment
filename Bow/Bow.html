@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Weapons World – Bow</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+
+  <script src="https://unpkg.com/scrollreveal@4.0.9/dist/scrollreveal.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
+
+  <style>
+      * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      font-family: sans-serif;
+    }
+
+    body {
+      background-color: #e0e0e0;
+    }
+
+    .header {
+      padding: 20px;
+      background-color: #333333;
+    }
+
+    .logo {
+      font-family: 'Bangers', cursive;
+      font-size: 48px;
+      color: #486c3e;
+      letter-spacing: 2px;
+      font-weight: bold;
+      text-shadow:
+        -2px -2px 0 #000,
+         2px -2px 0 #000,
+        -2px  2px 0 #000,
+         2px  2px  0 #000;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .subtitle {
+
+      font-size: 15px;
+  color: #cccccc;
+  font-family: 'Courier New', monospace;
+  gap: 5px;
+  margin-top: 8px;
+    }
+
+    
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: #6d6d6d54;
+      display: flex;
+      justify-content: right;
+      gap: 20px;
+      padding: 6px 20px;
+    }
+
+
+    .nav a, .dropbtn {
+      background-color: #444444;
+      color: #ffffff;
+      padding: 12px 28px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 6px;
+      transition: transform 0.2s ease, background-color 0.2s ease;
+      display: inline-block;
+    }
+
+    .nav a:hover, .dropbtn:hover {
+      transform: scale(1.2);
+      background-color: #222222;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #444444;
+      width: 160px;
+      z-index: 1;
+      border-radius: 6px;
+      overflow: hidden;
+      top: 100%;
+      left: 0;
+    }
+
+    .dropdown-content a {
+      color: white;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      transition: background-color 0.2s ease;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #222222;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .arrow {
+      display: inline-block;
+      margin-left: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .dropdown:hover .arrow {
+      transform: rotate(180deg);
+    }
+
+    .viewer-container {
+      padding: 40px 20px;
+      background: #f5f5f5;
+    }
+
+    .viewer-title {
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 30px;
+      font-family: 'Bangers', cursive;
+      color: #333;
+    }
+
+    .model-controls {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .model-button {
+      background: #444;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 12px 25px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .model-button:hover {
+      transform: scale(1.2);
+  background-color: #222;
+    }
+
+    .model-button.active {
+      background: #486c3e;
+    }
+
+    #threejs-viewer {
+      width: 65%;
+      height: 65vh;
+      background: #d0d0d0;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      position: relative;
+      margin: 0 auto;
+display: block;
+    }
+
+    .footer {
+      background:#333; color:#fff;
+      display:flex; justify-content:space-between; align-items:center;
+      padding:60px 30px; font-size:14px; flex-wrap:wrap;
+    }
+    .footer a { color:#fff; margin-left:16px; transition:0.3s }
+    .footer a:hover { color:#ccc }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <a href="../Weapons World.html" class="logo">Weapons World</a>
+    <div class="subtitle"><span id="typed"></span></div>
+  </div>
+
+  <div class="nav">
+    <a href="../Weapons World.html">Home</a>
+    <div class="dropdown">
+      <a href="javascript:void(0);" class="dropbtn">
+        Weapons <span class="arrow">▼</span>
+      </a>
+      <div class="dropdown-content">
+        <a href="../1911/1911.html">1911</a>
+        <a href="../Mossberg500/Mossberg500.html">Mossberg 500</a>
+        <a href="../Bow/Bow.html">Bow</a>
+    </div>
+    </div>
+    <a href="../About/About.html">About</a>
+    <a href="../Reference/Reference.html">Reference</a>
+    <a href="">Contact</a>
+  </div>
+
+  <div class="viewer-container">
+    <h2 class="viewer-title">Bow</h2>
+
+    <div id="color-picker-panel" style="position: absolute; top: 160px; left: 20px; background: rgba(255,255,255,0.9); padding: 12px 16px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); z-index: 1000;">
+      <label for="bg-color-picker" style="font-weight: bold; color: #4d4d4d; font-size: 14px;">Background Color</label><br>
+      <input type="color" id="bg-color-picker" value="#eeeeee" style="width: 100%; margin-top: 8px;">
+    </div>
+    <div id="threejs-viewer"></div>
+    <div id="light-control-panel" style="
+    position: absolute;
+    top: 160px;
+    right: 20px;
+    background: rgba(255,255,255,0.9);
+    padding: 12px 16px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+    width: 200px;
+  ">
+    <label style="font-weight: bold; font-size: 14px; color: #4d4d4d;">Light Intensity</label>
+    <input type="range" id="light-intensity" min="0" max="2" step="0.01" value="1" style="width: 100%; margin: 8px 0;"><br>
+  
+    <label style="font-weight: bold; font-size: 14px; color: #4d4d4d;">Light Color</label>
+    <input type="color" id="light-color" value="#ffffff" style="width: 100%; margin: 8px 0;"><br>
+  
+    <label style="font-weight: bold; font-size: 14px; color: #4d4d4d;">X</label>
+    <input type="range" id="light-pos-x" min="-20" max="20" step="0.1" value="5" style="width: 100%; margin: 6px 0;"><br>
+  
+    <label style="font-weight: bold; font-size: 14px; color: #4d4d4d;">Y</label>
+    <input type="range" id="light-pos-y" min="-20" max="20" step="0.1" value="10" style="width: 100%; margin: 6px 0;"><br>
+  
+    <label style="font-weight: bold; font-size: 14px; color: #4d4d4d;">Z</label>
+    <input type="range" id="light-pos-z" min="-20" max="20" step="0.1" value="7" style="width: 100%; margin: 6px 0;">
+  </div>
+  <div class="rotation-controls" style="display: flex; justify-content: center; margin-top: 10px; gap: 15px; flex-wrap: wrap;">
+    <button class="model-button" id="rotate-left-btn">Turn left</button>
+    <button class="model-button" id="rotate-right-btn">Turn right</button>
+    <button class="model-button" id="auto-rotate-btn">Antorotation</button>
+  </div>
+    <div class="model-controls">
+      <button class="model-button active" id="model-default-btn">Model</button>
+      <button class="model-button" id="normal-visual-btn">Wireframe</button>
+      <button class="model-button" id="reload-btn">Reload</button>
+      <button class="model-button" id="fire-btn">Fire</button>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div>© 2025 Web 3D Applications</div>
+    <div>
+      <a href="#">Facebook</a>
+      <a href="#">Twitter</a>
+      <a href="#">Instagram</a>
+    </div>
+  </footer>
+
+  <script>
+    let scene, camera, renderer, controls;
+    let currentModel, mixer, animations = [];
+    let currentModelIndex = 0;
+    const modelPaths = ['Bow.glb', 'Bow-1.glb', 'Bow-2.glb'];
+    let activeAnimations = [];
+    let isLoading = false;
+    let isNormalView = false;
+    let originalMaterials = [];
+
+    const modelAnimations = {
+      0: { defaultGroup: [] },
+      1: { defaultGroup: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15] },
+      2: { defaultGroup: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15] },
+    };
+
+    function updateActiveButton(buttonId) {
+      document.querySelectorAll('.model-button').forEach(btn => {
+        btn.classList.toggle('active', btn.id === buttonId);
+      });
+    }
+
+    function init() {
+      scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x9e9e9e);
+
+      const ambientLight = new THREE.AmbientLight(0xffffff, 3);
+      scene.add(ambientLight);
+      const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+      directionalLight.position.set(5, 10, 7);
+      directionalLight.castShadow = true;
+      scene.add(directionalLight);
+
+      const container = document.getElementById('threejs-viewer');
+      camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+      camera.position.set(0, 0, -5);
+
+      renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(container.clientWidth, container.clientHeight);
+      renderer.shadowMap.enabled = true;
+      container.appendChild(renderer.domElement);
+
+      controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.05;
+
+   
+      document.getElementById('model-default-btn').addEventListener('click', () => {
+        loadModelWithAnimation(0);
+        updateActiveButton('model-default-btn');
+      });
+      document.getElementById('reload-btn').addEventListener('click', () => {
+        loadModelWithAnimation(1); 
+        updateActiveButton('reload-btn');
+        const audio = new Audio('reload.mp3');
+        audio.play();
+      });
+
+      document.getElementById('fire-btn').addEventListener('click', () => {
+        loadModelWithAnimation(2); 
+        updateActiveButton('fire-btn');
+        const audio = new Audio('fire.mp3');
+        audio.play();
+      });
+      
+
+      document.getElementById('normal-visual-btn').addEventListener('click', () => {
+        if (!currentModel) return;
+        if (!isNormalView) {
+          currentModel.traverse(child => {
+            if (child.isMesh) {
+              originalMaterials.push({ mesh: child, material: child.material });
+              child.material = new THREE.MeshNormalMaterial({ wireframe: true });
+            }
+          });
+          isNormalView = true;
+           normalBtn.classList.add('active'); 
+        } else {
+          originalMaterials.forEach(entry => {
+            entry.mesh.material = entry.material;
+          });
+          originalMaterials = [];
+          isNormalView = false;
+          normalBtn.classList.remove('active'); 
+        }
+      });
+
+      window.addEventListener('resize', onWindowResize);
+      loadModel(0, false);
+      animate();
+    }
+    const intensitySlider = document.getElementById('light-intensity');
+const colorPicker = document.getElementById('light-color');
+const posXSlider = document.getElementById('light-pos-x');
+const posYSlider = document.getElementById('light-pos-y');
+const posZSlider = document.getElementById('light-pos-z');
+
+
+
+    function onWindowResize() {
+      const container = document.getElementById('threejs-viewer');
+      camera.aspect = container.clientWidth / container.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(container.clientWidth, container.clientHeight);
+    }
+
+    function loadModel(index, play = true) {
+      if (isLoading) return;
+      isLoading = true;
+      currentModelIndex = index;
+
+      if (currentModel) {
+        scene.remove(currentModel);
+        mixer = null;
+        animations = [];
+        activeAnimations = [];
+        originalMaterials = [];
+        isNormalView = false;
+      }
+
+      const loader = new THREE.GLTFLoader();
+      loader.load(modelPaths[index], gltf => {
+        currentModel = gltf.scene;
+        currentModel.position.set(0, 0, 0);
+        currentModel.scale.set(1, 1, 1);
+        scene.add(currentModel);
+
+        currentModel.traverse(child => {
+          if (child.isMesh) {
+            originalMaterials.push({ mesh: child, material: child.material });
+          }
+        });
+
+        if (gltf.animations.length > 0) {
+          mixer = new THREE.AnimationMixer(currentModel);
+          animations = gltf.animations;
+          if (play) {
+            const group = modelAnimations[index]?.defaultGroup || [];
+            playAnimationIndices(group);
+          }
+        }
+
+        isLoading = false;
+      });
+    }
+
+    function loadModelWithAnimation(index) {
+      if (index === currentModelIndex && !isLoading && animations.length > 0) {
+        const group = modelAnimations[index]?.defaultGroup || [];
+        playAnimationIndices(group);
+      } else {
+        loadModel(index, true);
+      }
+    }
+
+    function playAnimationIndices(indices) {
+      if (!mixer || !animations.length) return;
+      activeAnimations.forEach(anim => anim.stop());
+      activeAnimations = [];
+
+      indices.forEach(i => {
+        if (animations[i]) {
+          const action = mixer.clipAction(animations[i]);
+          action.reset();
+          action.clampWhenFinished = true;
+          action.loop = THREE.LoopOnce;
+          action.timeScale = 0.5;
+          action.play();
+          activeAnimations.push(action);
+        }
+      });
+    }
+
+
+
+    function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+      if (mixer) mixer.update(0.016);
+      renderer.render(scene, camera);
+    }
+
+    document.getElementById('bg-color-picker').addEventListener('input', (e) => {
+  if (scene) {
+    scene.background = new THREE.Color(e.target.value);
+  }
+});
+
+    window.addEventListener('DOMContentLoaded', () => {
+      new Typed('#typed', {
+        strings: ['—— Tactical intelligence online ——', '—— This is the world of weapons ——'],
+        typeSpeed: 45, backSpeed: 20, backDelay: 1500, loop: true
+      });
+      gsap.from('.header', { y: -120, duration: 1, ease: 'linear' });
+      gsap.from('.nav', { opacity: 0, duration: 1, delay: 1, ease: 'linear' });
+      ScrollReveal().reveal('.footer', { origin: 'bottom', distance: '40px', duration: 1000, easing: 'ease-out', opacity: 0 });
+      ScrollReveal().reveal('.viewer-container', { origin: 'bottom', distance: '40px', duration: 1000, delay: 500, easing: 'ease-out', opacity: 0 });
+
+      init();
+
+      const intensitySlider = document.getElementById('light-intensity');
+const colorPicker = document.getElementById('light-color');
+const posXSlider = document.getElementById('light-pos-x');
+const posYSlider = document.getElementById('light-pos-y');
+const posZSlider = document.getElementById('light-pos-z');
+
+
+let directionalLight = scene.children.find(child => child.type === 'DirectionalLight');
+
+intensitySlider.addEventListener('input', () => {
+  directionalLight.intensity = parseFloat(intensitySlider.value);
+});
+
+colorPicker.addEventListener('input', () => {
+  directionalLight.color.set(colorPicker.value);
+});
+
+posXSlider.addEventListener('input', () => {
+  directionalLight.position.x = parseFloat(posXSlider.value);
+});
+
+posYSlider.addEventListener('input', () => {
+  directionalLight.position.y = parseFloat(posYSlider.value);
+});
+
+posZSlider.addEventListener('input', () => {
+  directionalLight.position.z = parseFloat(posZSlider.value);
+});
+    });
+    let autoRotate = false;
+let rotateSpeed = 0.01;
+
+document.getElementById('rotate-left-btn').addEventListener('click', () => {
+  if (currentModel) {
+    currentModel.rotation.y += 0.1;
+  }
+});
+
+document.getElementById('rotate-right-btn').addEventListener('click', () => {
+  if (currentModel) {
+    currentModel.rotation.y -= 0.1;
+  }
+});
+
+document.getElementById('auto-rotate-btn').addEventListener('click', () => {
+  autoRotate = !autoRotate;
+  document.getElementById('auto-rotate-btn').classList.toggle('active', autoRotate);
+});
+
+
+function animate() {
+  requestAnimationFrame(animate);
+  
+  if (autoRotate && currentModel) {
+    currentModel.rotation.y += rotateSpeed;
+  }
+
+  controls.update();
+  if (mixer) mixer.update(0.016);
+  renderer.render(scene, camera);
+}
+    
+  </script>
+</body>
+</html>
